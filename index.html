@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycle d'innovation et d'intégration des nouvelles actions – Mission Locale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Bandeau coloré */
+        .color-banner {
+            height: 8px;
+            background: linear-gradient(90deg, #7A1A7A 20%, #E61D72 40%, #3BA4E0 60%, #7AC143 80%, #F7941D 100%);
+            margin-bottom: 40px;
+        }
+
+        /* Page de garde */
+        .cover-page {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .cover-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #7A1A7A;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            color: #E61D72;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #7A1A7A, #E61D72);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(122, 26, 122, 0.3);
+        }
+
+        /* Sommaire */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .step-card.step-1 { border-top-color: #7A1A7A; }
+        .step-card.step-2 { border-top-color: #E61D72; }
+        .step-card.step-3 { border-top-color: #3BA4E0; }
+        .step-card.step-4 { border-top-color: #7AC143; }
+        .step-card.step-5 { border-top-color: #F7941D; }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .step-card.step-1 .step-icon { color: #7A1A7A; }
+        .step-card.step-2 .step-icon { color: #E61D72; }
+        .step-card.step-3 .step-icon { color: #3BA4E0; }
+        .step-card.step-4 .step-icon { color: #7AC143; }
+        .step-card.step-5 .step-icon { color: #F7941D; }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Pages de contenu */
+        .content-header {
+            border-left: 6px solid;
+            padding-left: 25px;
+            margin-bottom: 40px;
+        }
+
+        .content-header.step-1 { border-left-color: #7A1A7A; }
+        .content-header.step-2 { border-left-color: #E61D72; }
+        .content-header.step-3 { border-left-color: #3BA4E0; }
+        .content-header.step-4 { border-left-color: #7AC143; }
+        .content-header.step-5 { border-left-color: #F7941D; }
+
+        .content-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .content-title.step-1 { color: #7A1A7A; }
+        .content-title.step-2 { color: #E61D72; }
+        .content-title.step-3 { color: #3BA4E0; }
+        .content-title.step-4 { color: #7AC143; }
+        .content-title.step-5 { color: #F7941D; }
+
+        .content-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content-body {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-content {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box.step-1 { border-left-color: #7A1A7A; }
+        .highlight-box.step-2 { border-left-color: #E61D72; }
+        .highlight-box.step-3 { border-left-color: #3BA4E0; }
+        .highlight-box.step-4 { border-left-color: #7AC143; }
+        .highlight-box.step-5 { border-left-color: #F7941D; }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #7A1A7A, #E61D72);
+            color: white;
+        }
+
+        .nav-btn.secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Page ressources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .resource-btn {
+            background: linear-gradient(135deg, #3BA4E0, #7AC143);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .resource-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 164, 224, 0.3);
+        }
+
+        .resource-btn.propose {
+            background: linear-gradient(135deg, #7AC143, #F7941D);
+        }
+
+        .resource-btn.propose:hover {
+            box-shadow: 0 8px 20px rgba(122, 193, 67, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2rem;
+            }
+            
+            .content-title {
+                font-size: 2rem;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page de garde -->
+    <div class="page active" id="cover">
+        <div class="cover-page">
+            <div class="color-banner"></div>
+            <h1 class="cover-title">Cycle d'innovation et d'intégration des nouvelles actions</h1>
+            <p class="cover-subtitle">ML Pays Basque</p>
+            <button class="start-btn" onclick="showPage('summary')">Commencer ✨</button>
+        </div>
+    </div>
+
+    <!-- Page sommaire -->
+    <div class="page" id="summary">
+        <div class="container">
+            <div class="color-banner"></div>
+            <h1 style="text-align: center; font-size: 2.5rem; color: #7A1A7A; margin-bottom: 20px;">Sommaire Interactif</h1>
+            <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 40px;">Cliquez sur une étape pour explorer le cycle d'innovation</p>
+            
+            <div class="summary-grid">
+                <div class="step-card step-1" onclick="showPage('step1')">
+                    <div class="step-icon">🔬</div>
+                    <h3 class="step-title">Étape 1 - Tests & Exploration</h3>
+                    <p class="step-description">Micro-expérimentations et retour terrain rapide pour valider les nouvelles approches</p>
+                </div>
+                
+                <div class="step-card step-2" onclick="showPage('step2')">
+                    <div class="step-icon">🎓</div>
+                    <h3 class="step-title">Étape 2 - Formation & Outillage</h3>
+                    <p class="step-description">Formation flash, fiches outils et partage entre pairs pour développer les compétences</p>
+                </div>
+                
+                <div class="step-card step-3" onclick="showPage('step3')">
+                    <div class="step-icon">📋</div>
+                    <h3 class="step-title">Étape 3 - Programmation & Planification</h3>
+                    <p class="step-description">Intégration CEJ/PACEA, calendrier et allocation des ressources</p>
+                </div>
+                
+                <div class="step-card step-4" onclick="showPage('step4')">
+                    <div class="step-icon">📢</div>
+                    <h3 class="step-title">Étape 4 - Diffusion & Dissémination</h3>
+                    <p class="step-description">Communication interne/externe et constitution d'une banque d'actions</p>
+                </div>
+                
+                <div class="step-card step-5" onclick="showPage('step5')">
+                    <div class="step-icon">📊</div>
+                    <h3 class="step-title">Étape 5 - Évaluation & Amélioration</h3>
+                    <p class="step-description">Feedback jeunes/professionnels, ajustements et plan d'amélioration continue</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="showPage('cover')">← Retour accueil</button>
+                <button class="nav-btn primary" onclick="showPage('resources')">Ressources & Collaboration →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étape 1 -->
+    <div class="page" id="step1">
+        <div class="container">
+            <div class="color-banner"></div>
+            <div class="content-header step-1">
+                <h1 class="content-title step-1">Tests & Exploration</h1>
+                <p class="content-subtitle">Micro-expérimentations et validation terrain</p>
+            </div>
+            
+            <div class="content-body">
+                <div class="content-section">
+                    <h3 class="section-title">🔬 Objectifs de cette étape</h3>
+                    <div class="section-content">
+                        <p>Cette première étape vise à tester rapidement de nouvelles approches avec un double regard : celui des <strong>jeunes bénéficiaires</strong> qui évaluent la pertinence et l'impact, et celui des <strong>professionnels</strong> qui analysent la faisabilité et l'intégration dans les pratiques existantes.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box step-1">
+                    <h4 style="margin-bottom: 10px; color: #7A1A7A;">🎯 Actions clés</h4>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Testing jeunes :</strong> Sélection d'un échantillon représentatif et micro-expérimentations (2-4 semaines)</li>
+                        <li><strong>Testing professionnels :</strong> Test de faisabilité, d'animation et d'intégration dans les pratiques</li>
+                        <li>Collecte de retours terrain en temps réel des deux publics</li>
+                        <li>Analyse croisée des résultats jeunes/professionnels</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">📝 Fiche Test & Reporting</h3>
+                    <div class="section-content">
+                        <p>Utilisez cette fiche standardisée pour documenter vos micro-expérimentations et faciliter le retour d'expérience.</p>
+                        <div style="background: #f8f9fa; border: 2px solid #7A1A7A; border-radius: 10px; padding: 25px; margin: 20px 0; font-family: 'Glacial Indifference', sans-serif; line-height: 1.8;">
+                            <h4 style="color: #7A1A7A; margin-bottom: 20px; text-align: center; font-family: 'Montserrat', sans-serif;">📝 Fiche Test & Reporting – Nouvelle action PAC</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>1. Informations de base</strong><br>
+                                Nom de l'action : ________________________<br>
+                                Porté par (conseiller/projet) : ____________________<br>
+                                Date / Lieu test : ________________________<br>
+                                Partenaires associés : ____________________
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>2. Objectifs du test (cochez)</strong><br>
+                                ☐ Répondre à un besoin identifié chez les jeunes<br>
+                                ☐ Expérimenter un nouvel outil/méthode<br>
+                                ☐ Vérifier l'adéquation avec CEJ / PACEA / autres dispositifs<br>
+                                ☐ Autre : ____________________
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>3. Public testé</strong><br>
+                                Nombre de jeunes : ____<br>
+                                Profil : ☐ CEJ ☐ PACEA ☐ Autre : ______<br>
+                                Conseillers impliqués : ____
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>4. Déroulé rapide</strong><br>
+                                Activités ou outils utilisés (ex : roue des émotions, 16 personnalités) :<br>
+                                _____________________<br>
+                                Durée du test : ____ min / h
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>5. Feedback jeunes (3 mots/phrases clés)</strong><br>
+                                _____________________
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>6. Feedback professionnels</strong><br>
+                                Ce qui a bien fonctionné : ____________________<br>
+                                Points à améliorer : ____________________<br>
+                                Potentiel de réutilisation : ☐ Oui ☐ Non ☐ À ajuster
+                            </div>
+                            
+                            <div style="margin-bottom: 0;">
+                                <strong>7. Décision pour la suite</strong><br>
+                                ☐ Déploiement possible<br>
+                                ☐ Nouveau test nécessaire<br>
+                                ☐ À abandonner
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">⚡ Méthodes recommandées</h3>
+                    <div class="section-content">
+                        <p><strong>Approche agile :</strong> Tests courts et itératifs permettant d'ajuster rapidement la nouvelle action selon les retours croisés jeunes/professionnels.</p>
+                        <p><strong>Focus groups jeunes :</strong> Rencontres hebdomadaires avec les jeunes testeurs pour recueillir leurs impressions et suggestions d'amélioration.</p>
+                        <p><strong>Débriefs professionnels :</strong> Sessions d'échange entre conseillers testeurs pour analyser la faisabilité, les difficultés d'animation et l'adaptation nécessaire.</p>
+                        <p><strong>Observation participante :</strong> Accompagnement croisé (jeunes observent les pros, pros observent les jeunes) pour identifier les points de friction et opportunités.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="showPage('summary')">← Sommaire</button>
+                <button class="nav-btn primary" onclick="showPage('step2')">Étape 2 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étape 2 -->
+    <div class="page" id="step2">
+        <div class="container">
+            <div class="color-banner"></div>
+            <div class="content-header step-2">
+                <h1 class="content-title step-2">Formation & Outillage</h1>
+                <p class="content-subtitle">Développement des compétences et partage d'expérience</p>
+            </div>
+            
+            <div class="content-body">
+                <div class="content-section">
+                    <h3 class="section-title">🎓 Objectifs de cette étape</h3>
+                    <div class="section-content">
+                        <p>Préparer les équipes à déployer efficacement les nouvelles actions validées en phase de test, en développant les compétences nécessaires et en créant les outils adaptés.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box step-2">
+                    <h4 style="margin-bottom: 10px; color: #E61D72;">🛠️ Outils développés</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Formations flash (2-3h) sur les nouvelles méthodes</li>
+                        <li>Fiches outils pratiques et guides d'animation</li>
+                        <li>Sessions de partage entre pairs et retours d'expérience</li>
+                        <li>Création d'une boîte à outils numérique</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">📋 Template Formation Flash</h3>
+                    <div class="section-content">
+                        <p>Utilisez ce modèle standardisé pour organiser vos formations flash et garantir une approche pédagogique cohérente.</p>
+                        <div style="background: #f8f9fa; border: 2px solid #E61D72; border-radius: 10px; padding: 25px; margin: 20px 0; font-family: 'Glacial Indifference', sans-serif; line-height: 1.6;">
+                            <h4 style="color: #E61D72; margin-bottom: 20px; text-align: center; font-family: 'Montserrat', sans-serif;">📋 Template Formation Flash – Nouvelle Action (PAC)</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>1. Informations générales</strong><br>
+                                Titre de la formation flash : ___________________<br>
+                                Thématique / Action concernée : ___________________<br>
+                                Date / Lieu : ___________________<br>
+                                Formateur(s) / Référent(s) : ___________________<br>
+                                Participants (pros) : ____
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>2. Objectifs pédagogiques</strong><br>
+                                Objectif principal : ___________________<br>
+                                Objectifs secondaires :<br>
+                                • ___________________<br>
+                                • ___________________
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>3. Déroulé type (3h30 - à adapter selon l'action)</strong><br>
+                                <div style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0; overflow-x: auto;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                                        <tr style="background: #E61D72; color: white;">
+                                            <th style="padding: 8px; border: 1px solid #ddd;">Temps</th>
+                                            <th style="padding: 8px; border: 1px solid #ddd;">Contenu</th>
+                                            <th style="padding: 8px; border: 1px solid #ddd;">Méthode</th>
+                                            <th style="padding: 8px; border: 1px solid #ddd;">Support</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">0' – 15'</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Introduction & attentes</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Icebreaker, présentation objectifs</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">PPT / Paperboard</td>
+                                        </tr>
+                                        <tr style="background: #f9f9f9;">
+                                            <td style="padding: 8px; border: 1px solid #ddd;">15' – 45'</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Contexte & apports</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Présentation de l'action, enjeux, méthode</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Support écrit / visuel</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">45' – 1h30</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Atelier pratique 1</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Test ou simulation d'un outil clé</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Fiche outil / cas pratique</td>
+                                        </tr>
+                                        <tr style="background: #f9f9f9;">
+                                            <td style="padding: 8px; border: 1px solid #ddd;">1h30 – 2h15</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Atelier pratique 2</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Mise en situation en sous-groupe</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Exercices, jeu de rôle</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">2h15 – 2h45</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Débrief collectif</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Retours, échanges, améliorations</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Paperboard</td>
+                                        </tr>
+                                        <tr style="background: #f9f9f9;">
+                                            <td style="padding: 8px; border: 1px solid #ddd;">2h45 – 3h15</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Plan d'action individuel</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Chaque participant note ce qu'il appliquera</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Fiche plan d'action</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">3h15 – 3h30</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Clôture & feedback</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Évaluation rapide</td>
+                                            <td style="padding: 8px; border: 1px solid #ddd;">Fiche feedback</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>4. Supports indispensables</strong><br>
+                                ☐ Fiches outil(s) ou méthodes de l'action<br>
+                                ☐ Quiz ou auto-évaluation (facultatif)<br>
+                                ☐ Plan d'action individuel (1 page)<br>
+                                ☐ Feedback participants (1 page)<br>
+                                ☐ Feuille d'émargement + droit à l'image
+                            </div>
+                            
+                            <div style="margin-bottom: 0;">
+                                <strong>5. Résultats & décisions</strong><br>
+                                Points forts observés : ___________________<br>
+                                Points à améliorer : ___________________<br>
+                                Décisions de suivi :<br>
+                                • Action à tester auprès de X bénéficiaires avant //___<br>
+                                • Prochaine étape : ☐ Nouveau test ☐ Déploiement ☐ Abandon
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">🤝 Approche collaborative</h3>
+                    <div class="section-content">
+                        <p><strong>Communautés de pratique :</strong> Création de groupes de travail thématiques pour favoriser l'échange d'expériences et la co-construction d'outils.</p>
+                        <p><strong>Mentorat interne :</strong> Mise en place d'un système de parrainage entre conseillers expérimentés et nouveaux utilisateurs des actions.</p>
+                        <p><strong>Capitalisation :</strong> Documentation systématique des bonnes pratiques et des écueils à éviter pour enrichir la base de connaissances commune.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="showPage('step1')">← Étape 1</button>
+                <button class="nav-btn primary" onclick="showPage('step3')">Étape 3 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étape 3 -->
+    <div class="page" id="step3">
+        <div class="container">
+            <div class="color-banner"></div>
+            <div class="content-header step-3">
+                <h1 class="content-title step-3">Programmation & Planification</h1>
+                <p class="content-subtitle">Intégration dans les parcours et allocation des ressources</p>
+            </div>
+            
+            <div class="content-body">
+                <div class="content-section">
+                    <h3 class="section-title">📋 Objectifs de cette étape</h3>
+                    <div class="section-content">
+                        <p>Intégrer les nouvelles actions validées dans la programmation officielle, en les articulant avec les dispositifs existants (CEJ, PACEA) et en planifiant leur déploiement.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box step-3">
+                    <h4 style="margin-bottom: 10px; color: #3BA4E0;">🗓️ Éléments de planification</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Intégration dans les parcours CEJ et PACEA</li>
+                        <li>Calendrier de déploiement progressif</li>
+                        <li>Allocation des ressources humaines et matérielles</li>
+                        <li>Définition des indicateurs de suivi</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">📋 Template Programmation & Planification</h3>
+                    <div class="section-content">
+                        <p>Utilisez cette fiche pour planifier le déploiement de vos nouvelles actions et organiser leur intégration dans les parcours existants.</p>
+                        <div style="background: #f8f9fa; border: 2px solid #3BA4E0; border-radius: 10px; padding: 25px; margin: 20px 0; font-family: 'Glacial Indifference', sans-serif; line-height: 1.6;">
+                            <h4 style="color: #3BA4E0; margin-bottom: 20px; text-align: center; font-family: 'Montserrat', sans-serif;">📋 Template Programmation & Planification – Nouvelle Action (PAC)</h4>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>1. Informations générales</strong><br>
+                                Nom de l'action : ___________________<br>
+                                Responsable déploiement : ___________________<br>
+                                Date de début prévue : ___________________<br>
+                                Date de fin prévue : ___________________<br>
+                                Statut validation : ☐ Test réussi ☐ Formation réalisée ☐ Prêt déploiement
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>2. Intégration dispositifs</strong><br>
+                                Compatible avec :<br>
+                                ☐ CEJ (Contrat d'Engagement Jeune)<br>
+                                ☐ PACEA (Parcours d'Accompagnement Contractualisé)<br>
+                                ☐ Autres dispositifs : ___________________<br>
+                                <br>
+                                Modalités d'intégration :<br>
+                                ☐ Action obligatoire dans le parcours<br>
+                                ☐ Action optionnelle selon profil<br>
+                                ☐ Action sur prescription conseiller
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>3. Phasage du déploiement</strong><br>
+                                <div style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0; overflow-x: auto;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem;">
+                                        <tr style="background: #3BA4E0; color: white;">
+                                            <th style="padding: 6px; border: 1px solid #ddd;">Phase</th>
+                                            <th style="padding: 6px; border: 1px solid #ddd;">Période</th>
+                                            <th style="padding: 6px; border: 1px solid #ddd;">Qui?</th>
+                                            <th style="padding: 6px; border: 1px solid #ddd;">Objectif</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Phase 1 - Test pro interne</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___/___</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___________</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Validation méthode</td>
+                                        </tr>
+                                        <tr style="background: #f9f9f9;">
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Phase 2 - Test Jeunes</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___/___</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___________</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Test terrain</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Phase 3 - Version finale</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___/___</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___________</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Ajustements finaux</td>
+                                        </tr>
+                                        <tr style="background: #f9f9f9;">
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Phase 4 - Formation pro</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___/___</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___________</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Montée en compétences</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Phase 5 - Com, promotion</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___/___</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___________</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Diffusion action</td>
+                                        </tr>
+                                        <tr style="background: #f9f9f9;">
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Phase 6 - Intégration offre de service et déploiement auprès des jeunes</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___/___</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">___________</td>
+                                            <td style="padding: 6px; border: 1px solid #ddd;">Déploiement complet</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>4. Ressources nécessaires</strong><br>
+                                <strong>Ressources humaines :</strong><br>
+                                • Conseillers formés : ___<br>
+                                • Temps conseiller par action : ___ h<br>
+                                • Intervenants externes : ___________________<br>
+                                <br>
+                                <strong>Ressources matérielles :</strong><br>
+                                • Salles nécessaires : ___________________<br>
+                                • Matériel spécifique : ___________________<br>
+                                • Supports pédagogiques : ___________________<br>
+                                <br>
+                                <strong>Budget estimé :</strong><br>
+                                • Coût par jeune : ___ €<br>
+                                • Budget total phase 1 : ___ €<br>
+                                • Financement : ☐ Acquis ☐ En recherche ☐ À valider
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>5. Indicateurs de suivi</strong><br>
+                                <strong>Indicateurs quantitatifs :</strong><br>
+                                • Nombre de jeunes participants : ___<br>
+                                • Taux de participation : ____%<br>
+                                • Taux d'abandon : ____%<br>
+                                <br>
+                                <strong>Indicateurs qualitatifs :</strong><br>
+                                • Satisfaction jeunes (échelle 1-10) : ___<br>
+                                • Satisfaction conseillers (échelle 1-10) : ___<br>
+                                • Impact sur parcours : ☐ Positif ☐ Neutre ☐ À améliorer
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <strong>6. Coordination & Communication</strong><br>
+                                <strong>Partenaires impliqués :</strong><br>
+                                • Internes : ___________________<br>
+                                • Externes : ___________________<br>
+                                <br>
+                                <strong>Communication :</strong><br>
+                                ☐ Information équipe réalisée<br>
+                                ☐ Mise à jour outils de gestion<br>
+                                ☐ Communication jeunes prévue<br>
+                                ☐ Information partenaires effectuée
+                            </div>
+                            
+                            <div style="margin-bottom: 0;">
+                                <strong>7. Validation & Suivi</strong><br>
+                                Validation direction : ☐ Oui ☐ En attente<br>
+                                Date comité de suivi : ___/___/___<br>
+                                Prochaine évaluation : ___/___/___<br>
+                                <br>
+                                <strong>Risques identifiés :</strong><br>
+                                • ___________________<br>
+                                • ___________________<br>
+                                <br>
+                                <strong>Actions préventives :</strong><br>
+                                • ___________________<br>
+                                • ___________________
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">⚙️ Mise en œuvre opérationnelle</h3>
+                    <div class="section-content">
+                        <p><strong>Phasage du déploiement :</strong> Mise en place progressive par secteurs géographiques ou publics cibles pour maîtriser la montée en charge.</p>
+                        <p><strong>Coordination inter-services :</strong> Articulation avec les partenaires externes et les autres services de la Mission Locale pour optimiser les synergies.</p>
+                        <p><strong>Suivi budgétaire :</strong> Estimation des coûts et recherche de financements complémentaires si nécessaire pour pérenniser les actions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="showPage('step2')">← Étape 2</button>
+                <button class="nav-btn primary" onclick="showPage('step4')">Étape 4 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étape 4 -->
+    <div class="page" id="step4">
+        <div class="container">
+            <div class="color-banner"></div>
+            <div class="content-header step-4">
+                <h1 class="content-title step-4">Diffusion & Dissémination</h1>
+                <p class="content-subtitle">Communication et constitution d'une banque d'actions</p>
+            </div>
+            
+            <div class="content-body">
+                <div class="content-section">
+                    <h3 class="section-title">📢 Objectifs de cette étape</h3>
+                    <div class="section-content">
+                        <p>Faire connaître les nouvelles actions auprès de tous les acteurs concernés et constituer une base de données partagée pour faciliter la réplication et l'adaptation.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box step-4">
+                    <h4 style="margin-bottom: 10px; color: #7AC143;">📡 Canaux de diffusion</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Communication interne : newsletters, réunions d'équipe</li>
+                        <li>Communication externe : site web, réseaux sociaux, partenaires</li>
+                        <li>Banque d'actions : fiches descriptives standardisées</li>
+                        <li>Événements : journées d'échange, colloques professionnels</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">🏦 Constitution de la banque d'actions</h3>
+                    <div class="section-content">
+                        <p><strong>Documentation standardisée :</strong> Création de fiches action comprenant objectifs, public cible, modalités, ressources nécessaires et résultats obtenus.</p>
+                        <p><strong>Système de classification :</strong> Organisation par thématiques, publics, durée et niveau de complexité pour faciliter la recherche et l'adaptation.</p>
+                        <p><strong>Plateforme collaborative :</strong> Mise en place d'un espace numérique permettant aux conseillers de consulter, commenter et enrichir les fiches d'actions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="showPage('step3')">← Étape 3</button>
+                <button class="nav-btn primary" onclick="showPage('step5')">Étape 5 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étape 5 -->
+    <div class="page" id="step5">
+        <div class="container">
+            <div class="color-banner"></div>
+            <div class="content-header step-5">
+                <h1 class="content-title step-5">Évaluation & Amélioration</h1>
+                <p class="content-subtitle">Feedback et plan d'amélioration continue</p>
+            </div>
+            
+            <div class="content-body">
+                <div class="content-section">
+                    <h3 class="section-title">📊 Objectifs de cette étape</h3>
+                    <div class="section-content">
+                        <p>Mesurer l'impact des nouvelles actions, recueillir les retours d'expérience et mettre en place un processus d'amélioration continue pour optimiser leur efficacité.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box step-5">
+                    <h4 style="margin-bottom: 10px; color: #F7941D;">🔄 Processus d'évaluation</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Feedback des jeunes : questionnaires de satisfaction, entretiens</li>
+                        <li>Retours des professionnels : bilans d'étape, groupes de travail</li>
+                        <li>Analyse des indicateurs quantitatifs et qualitatifs</li>
+                        <li>Plan d'Amélioration Continue (PAC) avec actions correctives</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">🎯 Amélioration continue</h3>
+                    <div class="section-content">
+                        <p><strong>Cycles d'évaluation :</strong> Mise en place d'évaluations trimestrielles pour identifier rapidement les axes d'amélioration et ajuster les actions.</p>
+                        <p><strong>Comité de pilotage :</strong> Instance de décision réunissant direction, conseillers et représentants des jeunes pour valider les évolutions proposées.</p>
+                        <p><strong>Capitalisation des apprentissages :</strong> Documentation des échecs et réussites pour enrichir la méthodologie et éviter la répétition d'erreurs.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="showPage('step4')">← Étape 4</button>
+                <button class="nav-btn primary" onclick="showPage('resources')">Ressources →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page ressources -->
+    <div class="page" id="resources">
+        <div class="container">
+            <div class="color-banner"></div>
+            <h1 style="text-align: center; font-size: 2.5rem; color: #7A1A7A; margin-bottom: 20px;">Ressources & Collaboration</h1>
+            <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 40px;">Outils et espaces collaboratifs pour enrichir vos pratiques</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon" style="color: #3BA4E0;">📂</div>
+                    <h3 style="color: #333; margin-bottom: 15px;">Annexes & Modèles</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Accédez aux fiches d'émargement, modèles de reporting, autorisations droit à l'image et autres documents utiles.</p>
+                    <button class="resource-btn" onclick="alert('Fonctionnalité en cours de développement - Les annexes seront bientôt disponibles !')">Accéder aux annexes</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon" style="color: #7AC143;">🟢</div>
+                    <h3 style="color: #333; margin-bottom: 15px;">Proposer une nouvelle action</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Partagez vos idées d'actions innovantes avec l'équipe via notre formulaire collaboratif.</p>
+                    <button class="resource-btn propose" onclick="showProposalForm()">Proposer une action</button>
+                </div>
+            </div>
+            
+            <div class="nav-buttons" style="margin-top: 60px;">
+                <button class="nav-btn secondary" onclick="showPage('summary')">← Retour au sommaire</button>
+                <button class="nav-btn primary" onclick="showPage('cover')">🏠 Accueil</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulaire de proposition (modal) -->
+    <div id="proposalModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; border-radius: 15px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+            <h2 style="color: #7A1A7A; margin-bottom: 20px; text-align: center;">Proposer une nouvelle action</h2>
+            <form id="proposalForm">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Nom de l'action :</label>
+                    <input type="text" style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;" required>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Public cible :</label>
+                    <select style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem;">
+                        <option>16-18 ans</option>
+                        <option>18-25 ans</option>
+                        <option>Tous publics</option>
+                        <option>Public spécifique</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Description de l'action :</label>
+                    <textarea style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; min-height: 100px;" required></textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Objectifs visés :</label>
+                    <textarea style="width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; min-height: 80px;"></textarea>
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                    <button type="button" onclick="closeProposalForm()" style="padding: 12px 25px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 25px; cursor: pointer;">Annuler</button>
+                    <button type="submit" style="padding: 12px 25px; background: linear-gradient(135deg, #7AC143, #F7941D); color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600;">Envoyer la proposition</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Masquer toutes les pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Afficher la page demandée
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll vers le haut
+            window.scrollTo(0, 0);
+        }
+
+        function showProposalForm() {
+            const modal = document.getElementById('proposalModal');
+            modal.style.display = 'flex';
+        }
+
+        function closeProposalForm() {
+            const modal = document.getElementById('proposalModal');
+            modal.style.display = 'none';
+        }
+
+        // Gestion du formulaire de proposition
+        document.getElementById('proposalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci pour votre proposition ! Elle sera examinée par l\'équipe et vous recevrez un retour sous 48h.');
+            closeProposalForm();
+            this.reset();
+        });
+
+        // Fermer le modal en cliquant à l'extérieur
+        document.getElementById('proposalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProposalForm();
+            }
+        });
+
+        // Fonction de téléchargement du template formation flash
+        function downloadFormationTemplate() {
+            try {
+                const templateContent = `📋 Template Modèle Formation Flash – Nouvelle Action (PAC)
+
+1. Informations générales
+
+Titre de la formation flash : ___________________
+
+Thématique / Action concernée : ___________________
+
+Date / Lieu : ___________________
+
+Formateur(s) / Référent(s) : ___________________
+
+Participants (pros) : ____
+
+2. Objectifs pédagogiques
+
+Objectif principal : ___________________
+
+Objectifs secondaires :
+• ___________________
+• ___________________
+
+3. Déroulé type (à compléter / adapter selon l'action)
+
+Temps          | Contenu                    | Méthode / Activité              | Support utilisé        | Animateur
+---------------|----------------------------|----------------------------------|------------------------|----------
+0' – 15'       | Introduction & attentes    | Icebreaker, présentation        | PPT / Paperboard      |
+               |                            | objectifs                        |                        |
+15' – 45'      | Contexte & apports        | Présentation rapide de          | Support écrit /        |
+               |                            | l'action, des enjeux, de        | visuel                 |
+               |                            | la méthode                       |                        |
+45' – 1h30     | Atelier pratique 1        | Test ou simulation d'un         | Fiche outil /          |
+               |                            | outil/méthode clé               | cas pratique           |
+1h30 – 2h15    | Atelier pratique 2        | Mise en situation en            | Exercices,             |
+               |                            | sous-groupe                      | jeu de rôle            |
+2h15 – 2h45    | Débrief collectif         | Retours, échanges, points       | Paperboard             |
+               |                            | d'amélioration                   |                        |
+2h45 – 3h15    | Plan d'action individuel  | Chaque participant note ce      | Fiche plan             |
+               |                            | qu'il appliquera avec son       | d'action               |
+               |                            | public                           |                        |
+3h15 – 3h30    | Clôture & feedback        | Évaluation rapide               | Fiche feedback         |
+               |                            | (formulaire, post-it)            |                        |
+
+4. Supports indispensables
+
+☐ Fiches outil(s) ou méthodes de l'action
+
+☐ Quiz ou auto-évaluation (facultatif)
+
+☐ Plan d'action individuel (1 page)
+
+☐ Feedback participants (1 page)
+
+☐ Feuille d'émargement + droit à l'image
+
+5. Résultats & décisions
+
+Points forts observés : ___________________
+
+Points à améliorer : ___________________
+
+Décisions de suivi :
+• Action à tester auprès de X bénéficiaires avant //___
+• Prochaine étape : ☐ Nouveau test ☐ Déploiement ☐ Abandon
+
+---
+Mission Locale - Cycle d'innovation et d'intégration des nouvelles actions`;
+
+                // Créer et télécharger le fichier
+                const element = document.createElement('a');
+                const file = new Blob([templateContent], {type: 'text/plain'});
+                element.href = URL.createObjectURL(file);
+                element.download = 'Template_Formation_Flash_PAC.txt';
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+                
+                // Message de confirmation
+                setTimeout(() => {
+                    alert('✅ Template Formation Flash téléchargé avec succès !');
+                }, 100);
+            } catch (error) {
+                alert('❌ Erreur lors du téléchargement. Veuillez réessayer.');
+                console.error('Erreur téléchargement:', error);
+            }
+        }
+
+        // Fonction de téléchargement de la fiche test
+        function downloadTestSheet() {
+            try {
+                const ficheContent = `📝 Fiche Test & Reporting – Nouvelle action PAC
+
+1. Informations de base
+
+Nom de l'action : ________________________
+
+Porté par (conseiller/projet) : ____________________
+
+Date / Lieu test : ________________________
+
+Partenaires associés : ____________________
+
+2. Objectifs du test (cochez)
+☐ Répondre à un besoin identifié chez les jeunes
+☐ Expérimenter un nouvel outil/méthode
+☐ Vérifier l'adéquation avec CEJ / PACEA / autres dispositifs
+☐ Autre : ____________________
+
+3. Public testé
+
+Nombre de jeunes : ____
+
+Profil : ☐ CEJ ☐ PACEA ☐ Autre : ______
+
+Conseillers impliqués : ____
+
+4. Déroulé rapide
+
+Activités ou outils utilisés (ex : roue des émotions, 16 personnalités) : 
+_____________________
+
+Durée du test : ____ min / h
+
+5. Feedback jeunes (3 mots/phrases clés)
+
+_____________________
+
+6. Feedback professionnels
+
+Ce qui a bien fonctionné : ____________________
+
+Points à améliorer : ____________________
+
+Potentiel de réutilisation : ☐ Oui ☐ Non ☐ À ajuster
+
+7. Décision pour la suite
+☐ Déploiement possible
+☐ Nouveau test nécessaire
+☐ À abandonner
+
+---
+Mission Locale - Cycle d'innovation et d'intégration des nouvelles actions`;
+
+                // Créer et télécharger le fichier
+                const element = document.createElement('a');
+                const file = new Blob([ficheContent], {type: 'text/plain'});
+                element.href = URL.createObjectURL(file);
+                element.download = 'Fiche_Test_Reporting_PAC.txt';
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+                
+                // Message de confirmation
+                setTimeout(() => {
+                    alert('✅ Fiche Test & Reporting téléchargée avec succès !');
+                }, 100);
+            } catch (error) {
+                alert('❌ Erreur lors du téléchargement. Veuillez réessayer.');
+                console.error('Erreur téléchargement:', error);
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980e0bb1d7e8f3ca',t:'MTc1ODE2OTE3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
